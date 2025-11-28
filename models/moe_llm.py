@@ -7,7 +7,7 @@ from models.layers import MoETransformerBlock
 
 
 class MoEMinimalLLM(nn.Module):
-    """Minimal LLM - Mixture of Experts"""
+    """Minimal LLM with Mixture of Experts"""
 
     def __init__(self, config: MoEModelConfig):
         super().__init__()

@@ -3,8 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from typing import Tuple, Optional
 
+
 class Expert(nn.Module):
-    """Single expert network (FeedForward layer)"""
+    """Single expert network (essentially a FeedForward layer)"""
     def __init__(self, d_model: int, d_ff: int, dropout: float = 0.1):
         super().__init__()
         self.linear1 = nn.Linear(d_model, d_ff, bias=False)
@@ -14,7 +15,8 @@ class Expert(nn.Module):
     def forward(self, x):
         return self.linear2(self.dropout(F.silu(self.linear1(x))))
 
-        class TopKRouter(nn.Module):
+
+class TopKRouter(nn.Module):
     """Router that selects top-k experts for each token"""
     def __init__(self, d_model: int, num_experts: int, top_k: int = 2):
         super().__init__()
